@@ -14,6 +14,8 @@ jobs:
     strategy:
       matrix:
         versions: [latest, 6, 9, 10, 12, 14]
+    env:
+      repo: "govpf/node"
     steps:
     -
       name: Checkout
@@ -37,11 +39,11 @@ jobs:
         pull: true
         push: true
         tags: |
-          govpf/node:${{ matrix.versions }}
+          ${{ env.repo }}:${{ matrix.versions }}
 
     - name: Update repo description
       uses: peter-evans/dockerhub-description@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-        repository: govpf/node
+        repository: "${{ env.repo }}"
