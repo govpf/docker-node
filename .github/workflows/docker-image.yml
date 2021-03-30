@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        versions: [latest, 6, 9, 10, 12, 14]
+        versions: [latest, 6, 9, 10, 12, 14, 15]
     env:
       repo: "govpf/node"
     steps:
