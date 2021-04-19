@@ -1,6 +1,6 @@
-FROM govpf/debian:stretch
+FROM govpf/debian:buster
 
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get update \
     && apt-get install -y nodejs procps make g++ \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
