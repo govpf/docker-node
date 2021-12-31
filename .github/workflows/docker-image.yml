@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         version: [latest, 10, 12, 14, 15, 16]
-        distro: [ stretch, buster ]
+        distro: [ stretch, buster, bullseye ]
     env:
       repo: "govpf/node"
     steps:
@@ -29,14 +29,21 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+    - name: Check file existence
+      id: check_files
+      uses: andstor/file-existence-action@v1
+      with:
+        files: ${{ matrix.version }}/${{ matrix.distro }}/Dockerfile
+
     - name: Compute tags
+      if: steps.check_files.outputs.files_exists == 'true'
       env:
         repo: ${{ env.repo }}
         version: ${{ matrix.version }}
         distro: ${{ matrix.distro }}
       run: |
         TAGS="${repo}:${version}-${distro}"
-        if [[ $distro == 'stretch' ]]; then
+        if [[ $distro == 'stretch' or $distro == 'bullseye' ]]; then
           TAGS+=",${repo}:${version}"
         fi
         echo 'docker_tags<<EOF' >> $GITHUB_ENV
@@ -44,6 +51,7 @@ jobs:
         echo 'EOF' >> $GITHUB_ENV
 
     - name: Build
+      if: steps.check_files.outputs.files_exists == 'true'
       uses: docker/build-push-action@v2.7.0
       with:
         context: .
@@ -54,6 +62,7 @@ jobs:
         tags: ${{ env.docker_tags }}
 
     - name: Update repo description
+      if: steps.check_files.outputs.files_exists == 'true'
       uses: peter-evans/dockerhub-description@v2.4.3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
