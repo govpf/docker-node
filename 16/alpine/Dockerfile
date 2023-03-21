@@ -8,6 +8,8 @@ RUN apk update \
     && npm i -g npm \
     && npm install --platform=linuxmusl --arch=x64 sharp \
     && curl -sL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
+    
+WORKDIR /
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["bash"]
