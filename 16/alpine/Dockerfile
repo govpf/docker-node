@@ -5,5 +5,5 @@ RUN apk update \
     && apk upgrade --no-cache \
     && npm i -g npm
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["bash"]
