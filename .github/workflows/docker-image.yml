@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         version: [latest, 10, 12, 14, 15, 16, 18]
-        distro: [ stretch, buster, bullseye, debian, alpine ]
+        distro: [ buster, bullseye, debian, alpine ]
     env:
       repo: "govpf/node"
     steps:
@@ -43,7 +43,7 @@ jobs:
         distro: ${{ matrix.distro }}
       run: |
         TAGS="${repo}:${version}-${distro}"
-        if [[ $distro == 'stretch' || $distro == 'bullseye' ]]; then
+        if [[ $distro == 'bullseye' ]]; then
           TAGS+=",${repo}:${version}"
         fi
         echo 'docker_tags<<EOF' >> $GITHUB_ENV
