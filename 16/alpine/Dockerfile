@@ -6,7 +6,6 @@ RUN apk update \
     && apk add nodejs npm yarn tini \
     && apk upgrade --no-cache \
     && npm i -g npm \
-    && npm install --platform=linuxmusl --arch=x64 sharp \
     && curl -sL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
     
 WORKDIR /
