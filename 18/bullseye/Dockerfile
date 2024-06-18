@@ -2,6 +2,7 @@ FROM govpf/debian:bullseye
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends nodejs yarn dumb-init \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
