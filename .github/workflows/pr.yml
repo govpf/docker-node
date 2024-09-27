@@ -44,7 +44,7 @@ jobs:
 
     - name: Build and push
       if: steps.check_files.outputs.files_exists == 'true'
-      uses: docker/build-push-action@v6.5.0
+      uses: docker/build-push-action@v6.8.0
       with:
         context: .
         file: ./${{ matrix.version }}/${{ matrix.distro }}/Dockerfile
