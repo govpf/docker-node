@@ -79,7 +79,7 @@ RUN set -ex \
   && yarn --version \
   && rm -rf /tmp/*
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY 22/debian/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD [ "node" ]
