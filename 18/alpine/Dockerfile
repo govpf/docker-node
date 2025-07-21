@@ -96,6 +96,8 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && yarn --version \
   && curl -sL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
 
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/cert.pem
+
 COPY 18/alpine/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
