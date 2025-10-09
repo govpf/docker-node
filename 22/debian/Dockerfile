@@ -80,6 +80,7 @@ RUN set -ex \
   && rm -rf /tmp/*
 
 COPY 22/debian/docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 CMD [ "node" ]
