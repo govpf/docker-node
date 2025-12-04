@@ -3,7 +3,7 @@ FROM govpf/alpine:3.20
 RUN apk upgrade && \
     apk add --no-cache xz
 
-ENV NODE_VERSION 22.10.0
+ENV NODE_VERSION 22.12.0
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
