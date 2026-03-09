@@ -79,6 +79,8 @@ RUN set -ex \
   && yarn --version \
   && rm -rf /tmp/*
 
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
 COPY 22/debian/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
