@@ -1,5 +1,5 @@
 FROM govpf/alpine:3.24
- 
+
 RUN apk upgrade && \
     apk add --no-cache xz
  
@@ -91,14 +91,28 @@ RUN addgroup -g 1000 node \
   && npm --version \
   && rm -rf /tmp/*
  
-# Yarn 1.x n'est pas installe dans cette image.
-# La procedure amont recupere la clef de signature Yarn sur un serveur de clefs
-# public au moment du build ; les deux serveurs utilises sont inexploitables
-# depuis le reseau DSI :
-#   - keyserver.ubuntu.com : contacte en hkp:// (port 11371), filtre -> timeout
-#   - keys.openpgp.org     : renvoie la clef sans UID, refusee par GnuPG
-# npm (fourni avec Node) couvre les besoins des projets Angular. Si un projet
-# exige Yarn, l'installer au niveau du projet plutot que dans l'image de base.
+# Node 24.18.0 embarque npm 11.16.0 ; on monte a la derniere majeure.
+# engines npm@12.0.1 : node ^22.22.2 || ^24.15.0 || >=26.0.0 -> OK avec 24.18.0
+ENV NPM_VERSION=12.0.1
+ 
+RUN npm install -g "npm@$NPM_VERSION" \
+  && npm cache clean --force \
+  # smoke test
+  && npm --version \
+  && rm -rf /tmp/*
+ 
+ENV YARN_VERSION=1.22.22
+ 
+# Yarn 1.x est installe depuis le registre npm, et non depuis yarnpkg.com :
+# npm verifie l'integrite du paquet via le SHA-512 publie par le registre, sans
+# dependre d'un serveur de clefs GPG (keyserver.ubuntu.com est filtre en hkp://
+# port 11371, et keys.openpgp.org renvoie la clef sans UID -> refusee par GnuPG).
+# Le paquet expose les binaires yarn et yarnpkg, comme la procedure amont.
+RUN npm install -g "yarn@$YARN_VERSION" \
+  && npm cache clean --force \
+  # smoke test
+  && yarn --version \
+  && rm -rf /tmp/*
  
 COPY 24/alpine/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
