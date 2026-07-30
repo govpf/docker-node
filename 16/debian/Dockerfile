@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get update \
     && apt-get install -y --no-install-recommends yarn \
     && rm -rf /var/lib/apt/lists/* \
-    && npm install -g npm@10 \
+    && npm install -g npm@9 \
     && curl -sL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
