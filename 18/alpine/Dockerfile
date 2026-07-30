@@ -1,4 +1,4 @@
-FROM govpf/alpine:3.24
+FROM govpf/alpine:3
 
 # only v16 can be installed with apk
 # so we going with the old way

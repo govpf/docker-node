@@ -1,4 +1,4 @@
-FROM govpf/alpine:3.24
+FROM govpf/alpine:3
 
 WORKDIR /app
 

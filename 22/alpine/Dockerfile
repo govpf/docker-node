@@ -1,4 +1,4 @@
-FROM govpf/alpine:3.24
+FROM govpf/alpine:3.20
 
 RUN apk upgrade && \
     apk add --no-cache xz
