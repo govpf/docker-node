@@ -10,9 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        #version: [latest, 10, 12, 14, 15, 16, 18]
-        #distro: [ buster, bullseye, debian, alpine ]
-        version: [latest, 18, 22, 24]
+        version: [latest, 16, 18, 22, 24]
         distro: [ debian, alpine ]
     env:
       repo: "govpf/node"
