@@ -1,5 +1,8 @@
 FROM govpf/alpine:3
 
+LABEL govpf.fromimage="govpf/alpine:3"
+LABEL govpf.category="runtime"
+
 # only v16 can be installed with apk
 # so we going with the old way
 

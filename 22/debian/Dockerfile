@@ -1,5 +1,8 @@
 FROM govpf/debian:bookworm
 
+LABEL govpf.fromimage="govpf/debian:bookworm"
+LABEL govpf.category="runtime"
+
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 

@@ -1,5 +1,8 @@
 FROM govpf/debian:bullseye
 
+LABEL govpf.fromimage="govpf/debian:bullseye"
+LABEL govpf.category="runtime"
+
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get update \
     && apt-get install -y nodejs tini \

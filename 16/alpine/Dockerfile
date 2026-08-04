@@ -1,5 +1,8 @@
 FROM govpf/alpine:3
 
+LABEL govpf.fromimage="govpf/alpine:3"
+LABEL govpf.category="runtime"
+
 WORKDIR /app
 
 RUN apk update \

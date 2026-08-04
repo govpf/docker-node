@@ -1,5 +1,8 @@
 FROM govpf/alpine:3.20
 
+LABEL govpf.fromimage="govpf/alpine:3.20"
+LABEL govpf.category="runtime"
+
 RUN apk upgrade && \
     apk add --no-cache xz
 
