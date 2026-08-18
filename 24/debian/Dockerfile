@@ -55,6 +55,9 @@ RUN npm install -g "yarn@$YARN_VERSION" \
   && npm cache clean --force \
   && yarn --version \
   && rm -rf /tmp/*
+
+# Autorise les packages npm à récupérer a distance.
+RUN npm config set allow-remote root --global
  
 ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
  

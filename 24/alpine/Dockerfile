@@ -116,6 +116,9 @@ RUN npm install -g "yarn@$YARN_VERSION" \
   # smoke test
   && yarn --version \
   && rm -rf /tmp/*
+
+# Autorise les packages npm à récupérer a distance.
+RUN npm config set allow-remote root --global
  
 COPY 24/alpine/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
