@@ -1,6 +1,6 @@
-FROM govpf/debian:bullseye
+FROM govpf/debian:bookworm
 
-LABEL govpf.fromimage="govpf/debian:bullseye"
+LABEL govpf.fromimage="govpf/debian:bookworm"
 LABEL govpf.category="runtime"
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
