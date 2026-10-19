@@ -5,13 +5,12 @@ LABEL govpf.category="runtime"
 
 WORKDIR /app
 
-RUN apk update \
-    && apk add nodejs npm yarn tini \
+RUN apk add --no-cache nodejs npm yarn tini openssl curl bash ca-certificates \
     && apk upgrade --no-cache \
     && npm install -g npm@8.19.4 \
     && npm install sharp \
-    && curl -sL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
-    
+    && curl -fsSL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
+
 WORKDIR /
 
 ENTRYPOINT ["/sbin/tini", "--"]
