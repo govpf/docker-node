@@ -1,6 +1,6 @@
-FROM govpf/alpine:3.20
+FROM govpf/alpine:3.24
 
-LABEL govpf.fromimage="govpf/alpine:3.20"
+LABEL govpf.fromimage="govpf/alpine:3.24"
 LABEL govpf.category="runtime"
 
 RUN apk upgrade && \
