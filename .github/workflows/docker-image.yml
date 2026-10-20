@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [latest, 16, 18, 22, 22.22, 24]
+        version: [latest, 16, 18, 22, 24]
         distro: [ debian, alpine ]
     env:
       repo: "govpf/node"
