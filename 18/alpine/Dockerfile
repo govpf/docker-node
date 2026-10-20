@@ -95,9 +95,9 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && apk del .build-deps-yarn \
-  # smoke test
   && yarn --version \
-  && curl -sL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
+  && apk add --no-cache openssl \
+  && curl -fsSL https://raw.githubusercontent.com/govpf/repo-utils/master/scripts/docker/install_certs | bash -
 
 ENV NODE_EXTRA_CA_CERTS=/etc/ssl/cert.pem
 
