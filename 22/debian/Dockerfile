@@ -12,7 +12,7 @@ RUN apt-get update && \
       xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-ENV NODE_VERSION 22.13.0
+ENV NODE_VERSION 22.23.4
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \

@@ -6,7 +6,7 @@ LABEL govpf.category="runtime"
 RUN apk upgrade && \
     apk add --no-cache xz
 
-ENV NODE_VERSION 22.13.0
+ENV NODE_VERSION 22.23.4
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \

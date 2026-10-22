@@ -13,7 +13,7 @@ RUN apt-get update && \
       xz-utils \
     && rm -rf /var/lib/apt/lists/*
  
-ENV NODE_VERSION=24.18.0
+ENV NODE_VERSION=24.22.1
  
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
