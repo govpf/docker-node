@@ -16,7 +16,7 @@ RUN addgroup -g 1000 node \
         curl \
     && ARCH= OPENSSL_ARCH='linux*' && alpineArch="$(apk --print-arch)" \
       && case "${alpineArch##*-}" in \
-        x86_64) ARCH='x64' CHECKSUM="b83b6d679e4bf1128c8e9e982f3e64cd8badaddf1e38613aa36f93186395f9fa" OPENSSL_ARCH=linux-x86_64;; \
+        x86_64) ARCH='x64' OPENSSL_ARCH=linux-x86_64;; \
         x86) OPENSSL_ARCH=linux-elf;; \
         aarch64) OPENSSL_ARCH=linux-aarch64;; \
         arm*) OPENSSL_ARCH=linux-armv4;; \
@@ -28,10 +28,19 @@ RUN addgroup -g 1000 node \
   # Autres archs : compilation depuis les sources, verifiee par GPG (long).
   && if [ -n "${CHECKSUM}" ]; then \
     set -eu; \
-    curl -fsSLO --compressed "https://unofficial-builds.nodejs.org/download/release/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz"; \
-    echo "$CHECKSUM  node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz" | sha256sum -c - \
-      && tar -xJf "node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
-      && ln -s /usr/local/bin/node /usr/local/bin/nodejs; \
+    TARBALL="node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz"; \
+    BASE_URL="https://unofficial-builds.nodejs.org/download/release/v$NODE_VERSION"; \
+    curl -fsSL --compressed "$BASE_URL/$TARBALL" -o "$TARBALL"; \
+    curl -fsSL --compressed "$BASE_URL/SHASUMS256.txt" -o SHASUMS256.txt; \
+    CHECKSUM="$(awk -v f="$TARBALL" '$2 == f {print $1}' SHASUMS256.txt)"; \
+    if [ -z "$CHECKSUM" ]; then \
+      echo "ERREUR : checksum introuvable pour $TARBALL" >&2; \
+      exit 1; \
+    fi; \
+    echo "$CHECKSUM  $TARBALL" | sha256sum -c -; \
+    tar -xJf "$TARBALL" -C /usr/local --strip-components=1 --no-same-owner; \
+    ln -sf /usr/local/bin/node /usr/local/bin/nodejs; \
+    rm -f "$TARBALL" SHASUMS256.txt; \
   else \
     echo "Building from source" \
     # backup build
