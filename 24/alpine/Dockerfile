@@ -52,6 +52,7 @@ RUN addgroup -g 1000 node \
     # hkps:// impose le port 443 ; hkp:// (port 11371) est filtre en reseau DSI.
     # Le --fingerprint fait echouer le build si la clef n'a pas ete importee.
     && for key in \
+      655F3B5C1FB3FA8D1A0CA6BDE4A7D232B936D2FD \
       5BE8A3F6C8A5C01D106C0AD820B1A390B168D356 \
       DD792F5973C6DE52C432CBDAC77ABFA00DDBF2B7 \
       CC68F5A3106FF448322E48ED27F5E38D5B0A215F \
