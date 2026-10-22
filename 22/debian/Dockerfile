@@ -29,6 +29,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   # gpg keys listed at https://github.com/nodejs/node#release-keys
   && set -ex \
   && for key in \
+    5BE8A3F6C8A5C01D106C0AD820B1A390B168D356 \
     C0D6248439F1D5604AAFFB4021D900FFDB233756 \
     4ED778F539E3634C779C87C6D7062848A1AB005C \
     141F07595B7B3FFE74309A937405533BE57C7D57 \
